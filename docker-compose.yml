@@ -1,0 +1,33 @@
+services:
+  water_analysis_parser:
+    build: ./
+    container_name: water_analysis_parser
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - OLLAMA_URL=http://ollama:11434/api/generate
+    command: npm run dev
+    depends_on:
+      - ollama
+    networks:
+      - water_network
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - water_network
+
+volumes:
+  ollama_data:
+
+networks:
+  water_network:
+    driver: bridge
