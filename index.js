@@ -56,10 +56,10 @@ app.post('/parse', upload.single('image'), async (req, res) => {
     // console.log('[PARSE] Распознанный текст:', text);
 
     // Запрос к Ollama
-    const prompt = `Проанализируй этот текст анализа воды и сделай выводы для пользователя:\n${text}`;
+    const prompt = `Проанализируй этот текст анализа воды и сделай выводы для пользователя, отвечай на русском языкеdocker compose :\n${text}`;
     console.log(`[LLM] Отправка промпта в Ollama: длина промпта ${prompt.length}`);
     const ollamaRes = await axios.post(process.env.OLLAMA_URL, {
-      model: "llama3",
+      model: "deepseek-r1:8b",
       prompt,
       stream: false
     });
