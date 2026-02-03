@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   ollama:
     image: ollama/ollama:latest
@@ -14,6 +16,7 @@ services:
               count: 1
               capabilities: [gpu]
     restart: unless-stopped
+    # Healthcheck для проверки готовности
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
       interval: 30s

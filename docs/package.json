@@ -3,14 +3,12 @@
   "version": "2.0.0",
   "description": "Vision LLM parser for water analysis blanks using Ollama",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "tsx watch src/index.ts",
-    "parse": "tsx src/index.ts",
-    "test": "tsx test/test-parser.ts",
-    "setup": "docker compose up -d && timeout /t 5 && docker exec ollama-vision ollama pull llama3.2-vision:11b",
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node test/test-parser.js",
+    "setup": "docker compose up -d && sleep 5 && docker exec ollama-vision ollama pull llama3.2-vision:11b",
     "ollama:start": "docker compose up -d",
     "ollama:stop": "docker compose down",
     "ollama:logs": "docker logs -f ollama-vision",
@@ -18,22 +16,18 @@
     "ollama:ps": "docker exec ollama-vision ollama ps"
   },
   "keywords": [
+    "ocr",
     "vision",
     "llm",
     "ollama",
-    "water-analysis",
-    "typescript"
+    "water-analysis"
   ],
   "author": "Pelmenya",
   "license": "MIT",
   "dependencies": {
     "ollama": "^0.5.11"
   },
-  "devDependencies": {
-    "@types/node": "^22.0.0",
-    "tsx": "^4.19.0",
-    "typescript": "^5.6.0"
-  },
+  "devDependencies": {},
   "engines": {
     "node": ">=18.0.0"
   }
